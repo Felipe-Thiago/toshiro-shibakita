@@ -31,10 +31,15 @@ if (mysqli_connect_errno()) {
 
 $valor_rand1 =  rand(1, 999);
 $valor_rand2 = strtoupper(substr(bin2hex(random_bytes(4)), 1));
+$cpf_rand = rand(11111111111, 99999999999);
+$valorAleatorio = mt_rand(1 * 100, 1000 * 100) / 100;
+$valorFormatado = number_format($valorAleatorio, 2, '.', '');
+$opcoesPag = ['debito', 'credito', 'dinheiro', 'pix'];
+$pag_rand = $opcoesPag[array_rand($opcoesPag)];
 $host_name = gethostname();
 
 
-$query = "INSERT INTO dados (AlunoID, Nome, Sobrenome, Endereco, Cidade, Host) VALUES ('$valor_rand1' , '$valor_rand2', '$valor_rand2', '$valor_rand2', '$valor_rand2','$host_name')";
+$query = "INSERT INTO dados (CompraID, Nome_Cliente, CPF, Cidade, Valor, OpcaoPagamento, Host) VALUES ('$valor_rand1' , '$valor_rand2', '$cpf_rand', '$valor_rand2', '$valorFormatado', '$pag_rand', '$host_name')";
 
 
 if ($link->query($query) === TRUE) {
